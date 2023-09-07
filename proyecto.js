@@ -2,9 +2,9 @@ let precioProducto;
 
 // Función para calcular el precio con IVA
 const calcularPrecioConIva = (precio, cantidad) => {
-  const iva = 0.21;
+  const iva = 1.21;
   const precioSinIva = precio * cantidad;
-  const precioConIva = precioSinIva * (1 + iva);
+  const precioConIva = precioSinIva * iva;
   return { precioSinIva, precioConIva };
 }
 
