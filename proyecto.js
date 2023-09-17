@@ -1,6 +1,11 @@
 let precioProducto;
+let productosDisponibles = [
+  { nombre: "Manzanas", precio: 640 },
+  { nombre: "Bananas", precio: 350 },
+  { nombre: "Queso", precio: 25 },
+  { nombre: "Pan", precio: 800 }
+];
 
-// Función para calcular el precio con IVA
 const calcularPrecioConIva = (precio, cantidad) => {
   const iva = 1.21;
   const precioSinIva = precio * cantidad;
@@ -8,7 +13,6 @@ const calcularPrecioConIva = (precio, cantidad) => {
   return { precioSinIva, precioConIva };
 }
 
-// Función para mostrar el precio del producto con y sin IVA. Se pone tofixed para redondear
 const mostrarPrecio = (producto, precioConIva, precioSinIva, cantidad) => {
   alert(`Has seleccionado ${cantidad} kilos de ${producto}. \nEl precio total con IVA es: $${precioConIva.toFixed(2)} \nEl precio sin IVA es: $${precioSinIva.toFixed(2)}`);
 }
@@ -16,40 +20,32 @@ const mostrarPrecio = (producto, precioConIva, precioSinIva, cantidad) => {
 let productoSeleccionado;
 
 while (true) {
-  const producto = prompt(
-    "Bienvenido al almacén ´Simona´ de tu barrio\n¿Qué vas a elegir hoy? Esto tenemos hoy en stock:\nManzanas\nBananas\nLeche\nPan\nSi quiere salir de esta ventana por favor escriba CANCELAR"
-  );
+  let productosTexto = "Bienvenido al almacén ´Simona´ de tu barrio\n¿Qué vas a elegir hoy? Esto tenemos hoy en stock:\n";
+  productosDisponibles.forEach((producto, index) => {
+    productosTexto += `${index + 1}. ${producto.nombre}\n`;
+  });
+  productosTexto += "Si quiere salir de esta ventana por favor escriba CANCELAR";
 
-  productoSeleccionado = producto.toLowerCase();
+  const userInput = prompt(productosTexto);
 
-  if (productoSeleccionado === "cancelar") {
+  if (userInput.toLowerCase() === "cancelar") {
     alert("Gracias por visitarnos. ¡Hasta luego!");
     break;
+  }
+
+  const selectedProductIndex = parseInt(userInput) - 1;
+  const selectedProduct = productosDisponibles[selectedProductIndex];
+
+  if (selectedProduct) {
+    productoSeleccionado = selectedProduct.nombre;
+    precioProducto = selectedProduct.precio;
+    break;
   } else {
-    switch (productoSeleccionado) {
-      case "manzanas":
-        precioProducto = 640; // Precio por kilogramo
-        break;
-      case "bananas":
-        precioProducto = 350; // Precio por kilogramo
-        break;
-      case "queso":
-        precioProducto = 25; // Precio por kilogramo
-        break;
-      case "pan":
-        precioProducto = 800; // Precio por unidad
-        break;
-      default:
-        alert("Producto no válido o no disponible. Por favor, elige una opción válida.");
-        continue; // Vuelve al principio del bucle para volver a preguntar
-    }
-    // Si pasa esto significa que se ha seleccionado un producto válido
-    break; // Salimos del bucle while
+    alert("Selección no válida. Por favor, elige una opción válida.");
   }
 }
 
 if (productoSeleccionado !== "cancelar") {
-  // Resto del código para calcular precios, mostrar detalles y confirmar la compra
   let cantidad;
   do {
     cantidad = parseFloat(prompt(`¿Cuántos kilos de ${productoSeleccionado} deseas comprar?`));
@@ -79,3 +75,4 @@ if (productoSeleccionado !== "cancelar") {
     alert("Decidiste no comprar, serás dirigido a la ventana principal.");
   }
 }
+
