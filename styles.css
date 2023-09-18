@@ -1,23 +1,23 @@
 /* Estilos generales */
 body {
     font-family: Arial, sans-serif;
-    margin: 20px; /* Ajuste del margen */
+    margin: 20px;
     padding: 0;
-    background-color: #3b1f1f; /* Color de fondo ligeramente más suave */
-    color: #333; /* Color de texto principal */
+    background-color: #3b1f1f;
+    color: #333;
 }
 
 .bienvenida {
     max-width: 800px;
-    margin: 0 auto; /* Ajuste del margen */
+    margin: 0 auto;
     padding: 20px;
     border-radius: 10px;
-    background-color: #fff; /* Fondo del contenedor */
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Sutil sombra */
+    background-color: #fff;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
 h1, h2 {
-    color: #0066cc; /* Color más llamativo para los títulos */
+    color: #0066cc;
 }
 
 p {
@@ -29,77 +29,43 @@ p {
 .quoted-text::before,
 .quoted-text::after {
     content: '';
-    color: #888; /* Color de las comillas */
+    color: #888;
 }
 
 /* Estilos para el contenedor de resumen de compra y productos filtrados */
 .container-resumen-filtrados {
     display: flex;
-    flex-wrap: wrap; /* Permitir que se envuelvan a una nueva línea si no hay suficiente espacio */
-    justify-content: space-between; /* Espacio entre ambos elementos */
-    margin-top: 20px; /* Espacio entre el div de bienvenida y los resúmenes */
+    flex-wrap: wrap;
+    justify-content: space-between;
+    margin-top: 20px;
 }
 
-/* Estilos para la sección de resumen de compra */
-.resumen-compra {
-    flex: 1; /* Ocupar todo el espacio disponible */
-    margin-right: 10px; /* Espacio entre elementos */
-    background-color: #f9f9f9; /* Fondo de la sección de resumen */
+/* Estilos comunes para resumen y productos filtrados */
+.resumen-compra, .productos-filtrados {
+    flex: 1;
+    margin: 0 10px;
+    background-color: #f9f9f9;
     border: 1px solid #ccc;
     border-radius: 10px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Sutil sombra */
-    padding: 10px; /* Agregamos un padding adicional */
-    margin-bottom: 20px; /* Espacio entre la sección y otros elementos */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    padding: 10px;
+    margin-bottom: 20px;
 }
 
-.resumen-compra h2 {
+.resumen-compra h2, .productos-filtrados h2 {
     color: #0066cc;
     margin-bottom: 10px;
 }
 
-.resumen-compra pre {
+.resumen-compra pre, .productos-filtrados pre {
     white-space: pre-wrap;
     font-size: 16px;
-    background-color: #e5e5e5; /* Color de fondo más suave para el bloque de código */
+    background-color: #e5e5e5;
     padding: 10px;
     border-radius: 5px;
 }
 
 /* Estilos para la sección de productos filtrados */
 .productos-filtrados {
-    flex: 1; /* Ocupar todo el espacio disponible */
-    margin-left: 10px; /* Espacio entre elementos */
-    background-color: #f9f9f9; /* Fondo de la sección de productos filtrados */
-    border: 1px solid #ccc;
-    border-radius: 10px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Sutil sombra */
-    padding: 10px; /* Agregamos un padding adicional */
-    margin-bottom: 20px; /* Espacio entre la sección y otros elementos */
-}
-
-.productos-filtrados h2 {
-    color: #0066cc;
-    margin-bottom: 10px;
-}
-
-.productos-filtrados pre {
-    white-space: pre-wrap;
-    font-size: 16px;
-    background-color: #e5e5e5; /* Color de fondo más suave para el bloque de código */
-    padding: 10px;
-    border-radius: 5px;
-}
-
-/* Utilizamos los estilos de resumen-compra para el resumen de productos filtrados */
-.productos-filtrados .resumen-compra h2 {
-    color: #0066cc;
-    margin-bottom: 10px;
-}
-
-.productos-filtrados .resumen-compra pre {
-    white-space: pre-wrap;
-    font-size: 16px;
-    background-color: #e5e5e5; /* Color de fondo más suave para el bloque de código */
-    padding: 10px;
-    border-radius: 5px;
+    margin-left: 0;
 }
