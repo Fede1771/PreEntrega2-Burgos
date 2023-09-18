@@ -1,5 +1,4 @@
 /* Estilos generales */
-
 body {
     font-family: Arial, sans-serif;
     margin: 0;
@@ -28,16 +27,14 @@ p {
 }
 
 .quoted-text::before {
-    content: ";
+    content: '"';
 }
 
 .quoted-text::after {
-    content: ";
+    content: '"';
 }
 
-
 /* Estilos para enlaces */
-
 a {
     color: #0066cc;
     text-decoration: none;
@@ -45,4 +42,27 @@ a {
 
 a:hover {
     text-decoration: underline;
+}
+
+/* Estilos para la sección de resumen de compra */
+.resumen-compra {
+    max-width: 600px;
+    margin: 20px auto;
+    padding: 20px;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+}
+
+.resumen-compra h2 {
+    color: #333;
+    margin-bottom: 10px;
+}
+
+.resumen-compra pre {
+    white-space: pre-wrap;
+    font-size: 16px;
+    background-color: #f9f9f9;
+    padding: 10px;
+    border-radius: 5px;
 }
