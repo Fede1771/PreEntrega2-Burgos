@@ -41,8 +41,8 @@ while (seguirComprando) {
   let productosTexto = "Bienvenido al almacén ´Simona´ de tu barrio\n¿Qué vas a elegir hoy? Esto tenemos hoy en stock:\n";
 
   productosDisponibles.forEach((producto, index) => {
-      const yaComprado = productosComprados.some(item => item.nombre === producto.nombre);
-      productosTexto += `${index + 1}. ${producto.nombre} - $${producto.precio} ${yaComprado ? '(Ya comprado)' : ''}\n`;
+    const yaComprado = productosComprados.some(item => item.nombre === producto.nombre);
+    productosTexto += `${index + 1}. ${producto.nombre} - $${producto.precio} ${yaComprado ? '(Ya comprado)' : ''}\n`;
   });
 
   productosTexto += "Si quiere salir de esta ventana por favor escriba CANCELAR";
@@ -50,23 +50,23 @@ while (seguirComprando) {
   const userInput = prompt(productosTexto);
 
   if (userInput.toLowerCase() === "cancelar") {
-      alert("Gracias por visitarnos. ¡Hasta luego!");
-      seguirComprando = false;
-      continue;
+    alert("Gracias por visitarnos. ¡Hasta luego!");
+    seguirComprando = false;
+    continue;
   }
 
   const selectedProductIndex = parseInt(userInput) - 1;
   const selectedProduct = productosDisponibles[selectedProductIndex];
 
   if (!selectedProduct) {
-      alert("Selección no válida. Por favor, elige una opción válida.");
-      continue;
+    alert("Selección no válida. Por favor, elige una opción válida.");
+    continue;
   }
 
   const yaComprado = productosComprados.some(item => item.nombre === selectedProduct.nombre);
   if (yaComprado) {
-      alert("Este producto ya ha sido comprado. Por favor, elige otro.");
-      continue;
+    alert("Este producto ya ha sido comprado. Por favor, elige otro.");
+    continue;
   }
 
   productoSeleccionado = selectedProduct.nombre;
@@ -75,43 +75,43 @@ while (seguirComprando) {
   let cantidad;
 
   do {
-      cantidad = parseFloat(prompt(`¿Cuántos kilos de ${productoSeleccionado} deseas comprar?`));
+    cantidad = parseFloat(prompt(`¿Cuántos kilos de ${productoSeleccionado} deseas comprar?`));
 
-      if (isNaN(cantidad) || cantidad <= 0) {
-          alert("Cantidad no válida. Debes ingresar una cantidad mayor que 0.");
-      }
+    if (isNaN(cantidad) || cantidad <= 0) {
+      alert("Cantidad no válida. Debes ingresar una cantidad mayor que 0.");
+    }
   } while (isNaN(cantidad) || cantidad <= 0);
 
   productosSeleccionados++;
 
   const { precioSinIva, precioConIva } = calcularPrecioConIva(
-      precioProducto,
-      cantidad,
-      calcularPrecioConIvaEstandar
+    precioProducto,
+    cantidad,
+    calcularPrecioConIvaEstandar
   );
 
   mostrarPrecio(productoSeleccionado, precioConIva, precioSinIva, cantidad);
 
   productosComprados.push({
-      nombre: productoSeleccionado,
-      cantidad,
-      precioConIva,
-      precioSinIva
+    nombre: productoSeleccionado,
+    cantidad,
+    precioConIva,
+    precioSinIva
   });
 
   if (productosSeleccionados >= 4) {
-      seguirComprando = false;
+    seguirComprando = false;
   } else {
-      let continuarComprando = prompt("¿Desea comprar algo más? Responda 'si' o 'no'.");
+    let continuarComprando = prompt("¿Desea comprar algo más? Responda 'si' o 'no'.");
 
-      while (continuarComprando.toLowerCase() !== 'si' && continuarComprando.toLowerCase() !== 'no') {
-          continuarComprando = prompt("Por favor, responda 'si' o 'no':");
-      }
+    while (continuarComprando.toLowerCase() !== 'si' && continuarComprando.toLowerCase() !== 'no') {
+      continuarComprando = prompt("Por favor, responda 'si' o 'no':");
+    }
 
-      if (continuarComprando.toLowerCase() === 'no') {
-          seguirComprando = false;
-          alert("Gracias por tu visita. ¡Hasta luego!");
-      }
+    if (continuarComprando.toLowerCase() === 'no') {
+      seguirComprando = false;
+      alert("Gracias por tu visita. ¡Hasta luego!");
+    }
   }
 }
 
@@ -137,25 +137,59 @@ resumenCompra += `Precio total de tu compra(con IVA): $${precioTotalConIva.toFix
 
 resumenTextoElement.textContent = resumenCompra;
 
-// Preguntar por el precio para filtrar
-const precioFiltro = parseFloat(prompt("Ingrese el precio para filtrar los productos (con IVA mayor a este precio):"));
+// Preguntar si desea filtrar por mayor o menor al precio introducido
+let filtroPor;
+
+while (true) {
+    filtroPor = prompt("¿Quiere filtrar por productos con precio mayor o menor al indicado? Responda 'mayor' o 'menor'.").toLowerCase();
+
+    if (filtroPor === 'mayor' || filtroPor === 'menor') {
+        break;
+    } else {
+        alert("Opción no válida. Por favor, ingrese 'mayor' o 'menor'.");
+    }
+}
+
+let precioFiltro;
+
+while (true) {
+    const userInput = prompt(`Ingrese el precio para filtrar los productos (con IVA ${filtroPor} a este precio):`);
+    precioFiltro = parseFloat(userInput);
+
+    if (!isNaN(precioFiltro) && precioFiltro >= 0) {
+        break;
+    } else {
+        alert("Precio no válido. Por favor, ingrese un número mayor o igual a 0.");
+    }
+}
 
 // Filtrar productos
-const productosFiltrados = productosComprados.filter(producto => producto.precioConIva > precioFiltro);
+const productosFiltradosElement = document.getElementById('productos-filtrados-texto');
+productosFiltradosElement.innerHTML = "";  // Limpiamos cualquier contenido anterior
+
+const productosFiltrados = productosComprados.filter(producto => {
+    if (filtroPor === 'mayor') {
+        return producto.precioConIva > precioFiltro;
+    } else {
+        return producto.precioConIva < precioFiltro;
+    }
+});
 
 // Mostrar productos filtrados
 if (productosFiltrados.length > 0) {
-  let mensajeFiltrados = "Productos con precio (con IVA) mayor al indicado:\n";
-  productosFiltrados.forEach(producto => {
-      mensajeFiltrados += `${producto.nombre} - Precio con IVA: $${producto.precioConIva.toFixed(2)}\n`;
-  });
-  alert(mensajeFiltrados);
+    let mensajeFiltrados = `<h3>Productos con precio (con IVA) ${filtroPor} a $${precioFiltro.toFixed(2)}:</h3><ul>`;
+    productosFiltrados.forEach(producto => {
+        mensajeFiltrados += `<li><strong>Producto:</strong> ${producto.nombre}<br><strong>Precio con IVA:</strong> $${producto.precioConIva.toFixed(2)}</li>`;
+    });
+    mensajeFiltrados += "</ul>";
+    productosFiltradosElement.innerHTML = mensajeFiltrados;
 } else {
-  alert("No hay productos que cumplan con el criterio de filtrado.");
+    productosFiltradosElement.innerHTML = `<p>No hay productos que cumplan con el criterio de precio ${filtroPor} a $${precioFiltro.toFixed(2)}.</p>`;
 }
 
 // Agradecimiento por la compra
 if (productosComprados.length > 0 && !agradecimientoMostrado) {
-  alert("¡Gracias por tu compra en Tienda Simona!");
-  agradecimientoMostrado = true;
+    alert("¡Gracias por tu compra en Tienda Simona!");
+    agradecimientoMostrado = true;
 }
+
