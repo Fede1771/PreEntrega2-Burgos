@@ -120,26 +120,59 @@ while (seguirComprando) {
   }
 }
 
+function limpiarMensajeHTML(mensaje) {
+  // Eliminar etiquetas HTML y conservar saltos de línea
+  return mensaje.replace(/<\/?[^>]+(>|$)/g, '');
+}
+
+const formatearMensaje = (mensaje) => {
+  return mensaje.replace(/<br>/g, '\n').replace(/<strong>|<\/strong>/g, '');
+};
+
 const resumenTextoElement = document.getElementById('resumen-texto');
-let resumenCompra = "Resumen de tu compra:\n\n";
+let resumenCompra = "Resumen de tu compra:<br><br>";
 let precioTotalConIva = 0;
 let precioTotalSinIva = 0;
 
 productosComprados.forEach(item => {
-  resumenCompra += `Producto: ${item.nombre}\n`;
-  resumenCompra += `Cantidad: ${item.cantidad} kilos\n`;
-  resumenCompra += `Precio por kilo (sin IVA): $${(item.precioSinIva / item.cantidad).toFixed(2)}\n`;
-  resumenCompra += `Precio total (sin IVA): $${item.precioSinIva.toFixed(2)}\n`;
-  resumenCompra += `Precio total (con IVA): $${item.precioConIva.toFixed(2)}\n\n`;
+  resumenCompra += `<strong>Producto:</strong> ${item.nombre}<br>`;
+  resumenCompra += `<strong>Cantidad:</strong> ${item.cantidad} kilos<br>`;
+  resumenCompra += `<strong>Precio por kilo (sin IVA):</strong> $${(item.precioSinIva / item.cantidad).toFixed(2)}<br>`;
+  resumenCompra += `<strong>Precio total (sin IVA):</strong> $${item.precioSinIva.toFixed(2)}<br>`;
+  resumenCompra += `<strong>Precio total (con IVA):</strong> $${item.precioConIva.toFixed(2)}<br><br>`;
 
   precioTotalConIva += item.precioConIva;
   precioTotalSinIva += item.precioSinIva;
 });
 
-resumenCompra += `Precio total de tu compra (sin IVA): $${precioTotalSinIva.toFixed(2)}\n`;
-resumenCompra += `Precio total de tu compra(con IVA): $${precioTotalConIva.toFixed(2)}\n`;
+resumenCompra += `<strong>Precio total de tu compra (sin IVA):</strong> $${precioTotalSinIva.toFixed(2)}<br>`;
+resumenCompra += `<strong>Precio total de tu compra (con IVA):</strong> $${precioTotalConIva.toFixed(2)}<br>`;
 
-resumenTextoElement.textContent = resumenCompra;
+resumenTextoElement.innerHTML = resumenCompra;
+
+const maxLengthPerAlert = 265;  // Máxima longitud permitida por alert
+let resumenCompraDividido = [];
+
+// Dividir el resumen de compra en partes más pequeñas
+let currentPart = '';
+const lines = resumenCompra.split('<br>');
+for (let i = 0; i < lines.length; i++) {
+  const line = lines[i];
+  if ((currentPart + line).length < maxLengthPerAlert) {
+    currentPart += line + '<br>';
+  } else {
+    resumenCompraDividido.push(currentPart);
+    currentPart = line + '<br>';
+  }
+}
+if (currentPart !== '') {
+  resumenCompraDividido.push(currentPart);
+}
+
+// Mostrar cada parte en un alert
+resumenCompraDividido.forEach((part, index) => {
+  alert(index === 0 ? formatearMensaje(part) : '...' + formatearMensaje(part));
+});
 
 if (productosComprados.length > 0) {
   let filtroPor;
@@ -168,7 +201,7 @@ if (productosComprados.length > 0) {
   }
 
   const productosFiltradosElement = document.getElementById('productos-filtrados-texto');
-  productosFiltradosElement.innerHTML = "";
+  productosFiltradosElement.innerHTML = '';  // Limpiar el contenido anterior
 
   const productosFiltrados = productosComprados.filter(producto => {
     if (filtroPor === 'mayor') {
@@ -179,15 +212,21 @@ if (productosComprados.length > 0) {
   });
 
   if (productosFiltrados.length > 0) {
-    let mensajeFiltrados = `<h3>Productos con precio (con IVA) ${filtroPor} a $${precioFiltro.toFixed(2)}:</h3><ul>`;
-    productosFiltrados.forEach(producto => {
-      mensajeFiltrados += `<li><strong>Producto:</strong> ${producto.nombre}<br><strong>Precio con IVA:</strong> $${producto.precioConIva.toFixed(2)}</li>`;
-    });
-    mensajeFiltrados += "</ul>";
-    productosFiltradosElement.innerHTML = mensajeFiltrados;
-  } else {
-    productosFiltradosElement.innerHTML = `<p>No hay productos que cumplan con el criterio de precio ${filtroPor} a $${precioFiltro.toFixed(2)}.</p>`;
-  }
-} else {
-  alert("No has comprado ningún producto. Gracias por visitarnos. ¡Hasta luego!");
+      let mensajeFiltrados = `<strong>Productos con precio (con IVA) ${filtroPor} a $${precioFiltro.toFixed(2)}:</strong><br><br>\n`;
+      productosFiltrados.forEach(producto => {
+        mensajeFiltrados += `\n<p>Producto: ${producto.nombre}\nPrecio con IVA: $${producto.precioConIva.toFixed(2)}</p><br>\n`;
+      });
+    
+      // Mostrar en el HTML
+      productosFiltradosElement.innerHTML = mensajeFiltrados;
+    
+      // Mostrar alerta con el resumen de productos filtrados
+      alert(limpiarMensajeHTML(mensajeFiltrados));
+    } else {
+      productosFiltradosElement.innerHTML = `<p>No hay productos que cumplan con el criterio de precio ${filtroPor} a $${precioFiltro.toFixed(2)}.</p>`;
+      alert(`No hay productos que cumplan con el criterio de precio ${filtroPor} a $${precioFiltro.toFixed(2)}.`);
+    }
+    
 }
+
+
