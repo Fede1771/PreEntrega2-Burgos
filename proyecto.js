@@ -31,13 +31,33 @@ const buscarProductoPorNombre = (nombre) => {
   return productosDisponibles.find(producto => producto.nombre.toLowerCase() === nombre.toLowerCase());
 }
 
+function obtenerCantidadValida(productoSeleccionado) {
+  let cantidad;
+  do {
+    const userInput = prompt(`¿Cuántos kilos de ${productoSeleccionado} deseas comprar?`);
+    cantidad = parseFloat(userInput);
+
+    if (isNaN(cantidad) || cantidad <= 0) {
+      mostrarError("Cantidad no válida. Debes ingresar una cantidad mayor que 0.");
+    }
+  } while (isNaN(cantidad) || cantidad <= 0);
+
+  return cantidad;
+}
+
+function mostrarError(mensaje) {
+  alert(`Error: ${mensaje}`);
+}
+
+function esFiltroValido(filtro) {
+  return filtro === 'mayor' || filtro === 'menor';
+}
+
 let seguirComprando = true;
 let productosSeleccionados = 0;
 let agradecimientoMostrado = false;
 
 while (seguirComprando) {
-  let productoSeleccionado;
-
   let productosTexto = "Bienvenido al almacén ´Simona´ de tu barrio\n¿Qué vas a elegir hoy? Esto tenemos hoy en stock:\n";
 
   productosDisponibles.forEach((producto, index) => {
@@ -49,73 +69,57 @@ while (seguirComprando) {
 
   const userInput = prompt(productosTexto);
 
-  if (userInput.toLowerCase() === "cancelar") {
-    alert("Gracias por visitarnos. ¡Hasta luego!");
+  if (userInput === null) {
+    // El usuario cerró la ventana de diálogo
     seguirComprando = false;
-    continue;
-  }
-
-  const selectedProductIndex = parseInt(userInput) - 1;
-  const selectedProduct = productosDisponibles[selectedProductIndex];
-
-  if (!selectedProduct) {
-    alert("Selección no válida. Por favor, elige una opción válida.");
-    continue;
-  }
-
-  const yaComprado = productosComprados.some(item => item.nombre === selectedProduct.nombre);
-  if (yaComprado) {
-    alert("Este producto ya ha sido comprado. Por favor, elige otro.");
-    continue;
-  }
-
-  productoSeleccionado = selectedProduct.nombre;
-  precioProducto = selectedProduct.precio;
-
-  let cantidad;
-
-  do {
-    cantidad = parseFloat(prompt(`¿Cuántos kilos de ${productoSeleccionado} deseas comprar?`));
-
-    if (isNaN(cantidad) || cantidad <= 0) {
-      alert("Cantidad no válida. Debes ingresar una cantidad mayor que 0.");
-    }
-  } while (isNaN(cantidad) || cantidad <= 0);
-
-  productosSeleccionados++;
-
-  const { precioSinIva, precioConIva } = calcularPrecioConIva(
-    precioProducto,
-    cantidad,
-    calcularPrecioConIvaEstandar
-  );
-
-  mostrarPrecio(productoSeleccionado, precioConIva, precioSinIva, cantidad);
-
-  productosComprados.push({
-    nombre: productoSeleccionado,
-    cantidad,
-    precioConIva,
-    precioSinIva
-  });
-
-  if (productosSeleccionados >= 4) {
+    break; // Salir completamente del bucle
+  } else if (userInput.trim().toLowerCase() === "cancelar") {
     seguirComprando = false;
+    break; // Salir completamente del bucle
   } else {
-    let continuarComprando = prompt("¿Desea comprar algo más? Responda 'si' o 'no'.");
+    const selectedProductIndex = parseInt(userInput) - 1;
+    const selectedProduct = productosDisponibles[selectedProductIndex];
 
-    while (continuarComprando.toLowerCase() !== 'si' && continuarComprando.toLowerCase() !== 'no') {
-      continuarComprando = prompt("Por favor, responda 'si' o 'no':");
+    if (!selectedProduct) {
+      mostrarError("Selección no válida. Por favor, elige una opción válida.");
+      continue;
     }
 
-    if (continuarComprando.toLowerCase() === 'no') {
+    const yaComprado = productosComprados.some(item => item.nombre === selectedProduct.nombre);
+    if (yaComprado) {
+      mostrarError("Este producto ya ha sido comprado. Por favor, elige otro.");
+      continue;
+    }
+
+    let productoSeleccionado = selectedProduct.nombre;
+    let precioProducto = selectedProduct.precio;
+
+    const cantidad = obtenerCantidadValida(productoSeleccionado);
+    productosSeleccionados++;
+
+    const { precioSinIva, precioConIva } = calcularPrecioConIva(
+      precioProducto,
+      cantidad,
+      calcularPrecioConIvaEstandar
+    );
+
+    mostrarPrecio(productoSeleccionado, precioConIva, precioSinIva, cantidad);
+
+    productosComprados.push({
+      nombre: productoSeleccionado,
+      cantidad,
+      precioConIva,
+      precioSinIva
+    });
+
+    if (productosSeleccionados >= 4) {
       seguirComprando = false;
-      alert("Gracias por tu visita. ¡Hasta luego!");
+    } else {
+      seguirComprando = confirm("¿Desea comprar algo más?");
     }
   }
 }
 
-// Mostrar resumen de compra en la sección específica
 const resumenTextoElement = document.getElementById('resumen-texto');
 let resumenCompra = "Resumen de tu compra:\n\n";
 let precioTotalConIva = 0;
@@ -137,59 +141,53 @@ resumenCompra += `Precio total de tu compra(con IVA): $${precioTotalConIva.toFix
 
 resumenTextoElement.textContent = resumenCompra;
 
-// Preguntar si desea filtrar por mayor o menor al precio introducido
-let filtroPor;
+if (productosComprados.length > 0) {
+  let filtroPor;
 
-while (true) {
+  while (true) {
     filtroPor = prompt("¿Quiere filtrar por productos con precio mayor o menor al indicado? Responda 'mayor' o 'menor'.").toLowerCase();
 
-    if (filtroPor === 'mayor' || filtroPor === 'menor') {
-        break;
+    if (esFiltroValido(filtroPor)) {
+      break;
     } else {
-        alert("Opción no válida. Por favor, ingrese 'mayor' o 'menor'.");
+      mostrarError("Opción no válida. Por favor, ingrese 'mayor' o 'menor'.");
     }
-}
+  }
 
-let precioFiltro;
+  let precioFiltro;
 
-while (true) {
-    const userInput = prompt(`Ingrese el precio para filtrar los productos (con IVA ${filtroPor} a este precio):`);
+  while (true) {
+    const userInput = prompt(`Ingrese el precio para filtrar los productos (+ IVA ${filtroPor} a este precio):`);
     precioFiltro = parseFloat(userInput);
 
     if (!isNaN(precioFiltro) && precioFiltro >= 0) {
-        break;
+      break;
     } else {
-        alert("Precio no válido. Por favor, ingrese un número mayor o igual a 0.");
+      mostrarError("Precio no válido. Por favor, ingrese un número mayor o igual a 0.");
     }
-}
+  }
 
-// Filtrar productos
-const productosFiltradosElement = document.getElementById('productos-filtrados-texto');
-productosFiltradosElement.innerHTML = "";  // Limpiamos cualquier contenido anterior
+  const productosFiltradosElement = document.getElementById('productos-filtrados-texto');
+  productosFiltradosElement.innerHTML = "";
 
-const productosFiltrados = productosComprados.filter(producto => {
+  const productosFiltrados = productosComprados.filter(producto => {
     if (filtroPor === 'mayor') {
-        return producto.precioConIva > precioFiltro;
+      return producto.precioConIva > precioFiltro;
     } else {
-        return producto.precioConIva < precioFiltro;
+      return producto.precioConIva < precioFiltro;
     }
-});
+  });
 
-// Mostrar productos filtrados
-if (productosFiltrados.length > 0) {
+  if (productosFiltrados.length > 0) {
     let mensajeFiltrados = `<h3>Productos con precio (con IVA) ${filtroPor} a $${precioFiltro.toFixed(2)}:</h3><ul>`;
     productosFiltrados.forEach(producto => {
-        mensajeFiltrados += `<li><strong>Producto:</strong> ${producto.nombre}<br><strong>Precio con IVA:</strong> $${producto.precioConIva.toFixed(2)}</li>`;
+      mensajeFiltrados += `<li><strong>Producto:</strong> ${producto.nombre}<br><strong>Precio con IVA:</strong> $${producto.precioConIva.toFixed(2)}</li>`;
     });
     mensajeFiltrados += "</ul>";
     productosFiltradosElement.innerHTML = mensajeFiltrados;
-} else {
+  } else {
     productosFiltradosElement.innerHTML = `<p>No hay productos que cumplan con el criterio de precio ${filtroPor} a $${precioFiltro.toFixed(2)}.</p>`;
+  }
+} else {
+  alert("No has comprado ningún producto. Gracias por visitarnos. ¡Hasta luego!");
 }
-
-// Agradecimiento por la compra
-if (productosComprados.length > 0 && !agradecimientoMostrado) {
-    alert("¡Gracias por tu compra en Tienda Simona!");
-    agradecimientoMostrado = true;
-}
-
