@@ -1,71 +1,157 @@
-/* Estilos generales */
 body {
-    font-family: Arial, sans-serif;
-    margin: 20px;
-    padding: 0;
-    background-color: #3b1f1f;
-    color: #333;
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 20px;
+  background-color: #3a2525;
+  color: #333;
 }
 
-.bienvenida {
-    max-width: 800px;
-    margin: 0 auto;
-    padding: 20px;
-    border-radius: 10px;
-    background-color: #fff;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+.container {
+  max-width: 800px;
+  margin: 0 auto;
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
 h1, h2 {
-    color: #0066cc;
+  color: #0066cc;
 }
 
-p {
-    font-size: 1.2em;
-    line-height: 1.6;
-    color: #555;
+label {
+  display: block;
+  margin-bottom: 5px;
 }
 
-.quoted-text::before,
-.quoted-text::after {
-    content: '';
-    color: #888;
+select, input[type="number"] {
+  width: 100%;
+  padding: 8px;
+  margin-bottom: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
 }
 
-/* Estilos para el contenedor de resumen de compra y productos filtrados */
-.container-resumen-filtrados {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
-    margin-top: 20px;
+button {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  color: #fff;
+  background-color: #0066cc;
+  cursor: pointer;
 }
 
-/* Estilos comunes para resumen y productos filtrados */
-.resumen-compra, .productos-filtrados {
-    flex: 1;
-    margin: 0 10px;
-    background-color: #f9f9f9;
-    border: 1px solid #ccc;
-    border-radius: 10px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    padding: 10px;
-    margin-bottom: 20px;
+button:hover {
+  background-color: #0050a3;
 }
 
-.resumen-compra h2, .productos-filtrados h2 {
-    color: #0066cc;
-    margin-bottom: 10px;
+.welcome-section {
+  background-color: #f9f9f9;
+  padding: 20px;
+  border-radius: 10px;
+  margin-bottom: 20px;
+  max-width: 600px;
+  margin: 0 auto;
 }
 
-.resumen-compra pre, .productos-filtrados pre {
-    white-space: pre-wrap;
-    font-size: 16px;
-    background-color: #e5e5e5;
-    padding: 10px;
-    border-radius: 5px;
+.welcome-section h2 {
+  color: #0066cc;
+  margin-bottom: 10px;
+  text-transform: uppercase;
 }
 
-/* Estilos para la sección de productos filtrados */
-.productos-filtrados {
-    margin-left: 0;
+.welcome-section p {
+  font-size: 18px; /* Ajustamos el tamaño de la fuente */
+  color: #444; /* Cambiamos el color del texto */
+  line-height: 1.6; /* Ajustamos la altura de línea para una mejor legibilidad */
+}
+
+
+.resumen-section {
+  border: 1px solid #ccc;
+  padding: 10px;
+  border-radius: 10px;
+  margin-bottom: 20px;
+}
+
+/* Estilos específicos para la sección de productos disponibles */
+.productos-section {
+  margin-bottom: 20px;
+  text-align: center; /* Centrar contenido */
+  max-width: 600px; /* Ancho máximo */
+  margin: 0 auto; /* Centrar horizontalmente */
+}
+
+.productos-section h2 {
+  color: #0066cc;
+  margin-bottom: 10px;
+  text-transform: uppercase; /* Convertir a mayúsculas */
+}
+
+label[for="seleccion-producto"],
+label[for="cantidad-producto"] {
+  color: #0066cc;; /* Cambia a cualquier color que desees, en este caso, es rojo (#ff0000) */
+}
+
+/* Estilo para los labels */
+label {
+  display: inline-block; /* Mostrar en línea y respetar márgenes */
+  margin-right: 10px;
+  margin-left: 10px; /* Espacio a la derecha para separar los labels */
+  color: #0066cc; /* Color de texto negro */
+}
+
+/* Ajuste para que los labels estén alineados verticalmente con los elementos de entrada */
+label[for="seleccion-producto"],
+label[for="cantidad-producto"],
+label[for="filtrar-por-mayor"],
+label[for="filtrar-por-menor"] {
+  vertical-align: middle;
+}
+
+#productos-disponibles {
+  list-style: none;
+  padding: 0;
+  margin: 0; /* Eliminar margen para que esté más al centro */
+}
+
+#productos-disponibles li {
+  margin-bottom: 10px; /* Mayor espacio entre elementos */
+  padding: 10px;
+  background-color: #f9f9f9;
+  border-radius: 10px;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+}
+
+#productos-disponibles li:hover {
+  background-color: #e0e0e0; /* Cambio de color al pasar el mouse */
+  transition: background-color 0.3s ease-in-out;
+}
+
+/* Estilos para las secciones de acciones */
+.acciones-section button {
+  margin-right: 10px;
+}
+
+/* Estilos para la sección de resumen y productos filtrados */
+.resumen-section, #productos-filtrados-texto {
+  background-color: #f9f9f9;
+} 
+
+.resumen-section h2, #productos-filtrados-texto strong {
+  color: #0066cc;
+  margin-bottom: 10px;
+}
+
+.resumen-section pre, #productos-filtrados-texto p {
+  white-space: pre-wrap;
+  font-size: 16px;
+  background-color: #e5e5e5;
+  padding: 10px;
+  border-radius: 5px;
+}
+
+#productos-filtrados-texto strong {
+  display: block;
+  margin-bottom: 10px;
 }
