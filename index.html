@@ -15,7 +15,7 @@
   </div>
   
   <div class="productos-section">
-    <h2>Productos disponibles</h2>
+    <h2>Productos disponibles en el menu</h2>
     <div id="productos-disponibles-container">
       <ul id="productos-disponibles"></ul>
     </div>
@@ -35,8 +35,12 @@
 
 
   <button id="comprar-btn">Comprar</button>
-  <button id="limpiar-btn">Limpiar</button>
-  <button id="filtrar-btn">Filtrar</button>
+  
+  
+
+  <label for="precio-filtro">Ingrese el precio para filtrar los productos (+ IVA): </label>
+<input type="number" id="precio-filtro" placeholder="Precio para filtrar" step="0.01">
+
 
   <label for="filtrar-por-mayor">Filtrar por mayor:</label>
   <input type="checkbox" id="filtrar-por-mayor">
@@ -45,6 +49,8 @@
   <label for="filtrar-por-menor">Filtrar por menor:</label>
   <input type="checkbox" id="filtrar-por-menor">
 
+  <button id="filtrar-btn">Filtrar</button>
+
   <h2>Resumen de compra</h2>
   <div id="resumen-compra" class="resumen-section"></div>
 
@@ -52,6 +58,8 @@
   <div id="productos-filtrados" class="resumen-section">
     <div id="productos-filtrados-texto"></div>
   </div>
+
+  <button id="limpiar-btn">Limpiar</button>
 
   <script src="proyecto.js"></script>
 </body>

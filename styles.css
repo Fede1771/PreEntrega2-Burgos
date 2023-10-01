@@ -1,3 +1,4 @@
+/* Estilos generales para la página */
 body {
   font-family: Arial, sans-serif;
   margin: 0;
@@ -6,6 +7,7 @@ body {
   color: #333;
 }
 
+/* Contenedor principal */
 .container {
   max-width: 800px;
   margin: 0 auto;
@@ -15,23 +17,27 @@ body {
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
+/* Estilos para títulos */
 h1, h2 {
   color: #0066cc;
 }
 
+/* Estilos para etiquetas */
 label {
   display: block;
   margin-bottom: 5px;
 }
 
-select, input[type="number"] {
-  width: 100%;
+/* Estilos para menú de selección */
+select {
+  width: 60%; /* Ajusta el ancho según tu preferencia */
   padding: 8px;
   margin-bottom: 10px;
   border: 1px solid #ccc;
   border-radius: 5px;
 }
 
+/* Estilos para botones */
 button {
   padding: 10px 20px;
   border: none;
@@ -39,12 +45,22 @@ button {
   color: #fff;
   background-color: #0066cc;
   cursor: pointer;
+  transition: background-color 0.3s ease;
 }
 
 button:hover {
   background-color: #0050a3;
+  transition: background-color 0.3s ease;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
 }
 
+/* Animación al hacer clic en el botón */
+button:active {
+  transform: translateY(3px) rotate(-3deg);
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+}
+
+/* Sección de bienvenida */
 .welcome-section {
   background-color: #f9f9f9;
   padding: 20px;
@@ -52,6 +68,18 @@ button:hover {
   margin-bottom: 20px;
   max-width: 600px;
   margin: 0 auto;
+  animation: fadeInUp 1s forwards;
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 .welcome-section h2 {
@@ -61,12 +89,12 @@ button:hover {
 }
 
 .welcome-section p {
-  font-size: 18px; /* Ajustamos el tamaño de la fuente */
-  color: #444; /* Cambiamos el color del texto */
-  line-height: 1.6; /* Ajustamos la altura de línea para una mejor legibilidad */
+  font-size: 18px;
+  color: #444;
+  line-height: 1.6;
 }
 
-
+/* Sección de resumen */
 .resumen-section {
   border: 1px solid #ccc;
   padding: 10px;
@@ -77,20 +105,21 @@ button:hover {
 /* Estilos específicos para la sección de productos disponibles */
 .productos-section {
   margin-bottom: 20px;
-  text-align: center; /* Centrar contenido */
-  max-width: 600px; /* Ancho máximo */
-  margin: 0 auto; /* Centrar horizontalmente */
+  text-align: center;
+  max-width: 600px;
+  margin: 0 auto;
 }
 
 .productos-section h2 {
   color: #0066cc;
   margin-bottom: 10px;
-  text-transform: uppercase; /* Convertir a mayúsculas */
+  text-transform: uppercase;
 }
 
+/* Estilos para etiquetas de selección de producto y cantidad */
 label[for="seleccion-producto"],
 label[for="cantidad-producto"] {
-  color: #0066cc;; /* Cambia a cualquier color que desees, en este caso, es rojo (#ff0000) */
+  color: #0066cc;
 }
 
 /* Estilo para los labels */
@@ -109,23 +138,26 @@ label[for="filtrar-por-menor"] {
   vertical-align: middle;
 }
 
+/* Lista de productos disponibles */
 #productos-disponibles {
   list-style: none;
   padding: 0;
-  margin: 0; /* Eliminar margen para que esté más al centro */
+  margin: 0;
 }
 
 #productos-disponibles li {
-  margin-bottom: 10px; /* Mayor espacio entre elementos */
+  margin-bottom: 10px;
   padding: 10px;
   background-color: #f9f9f9;
   border-radius: 10px;
   box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+  transition: background-color 0.3s ease;
 }
 
 #productos-disponibles li:hover {
-  background-color: #e0e0e0; /* Cambio de color al pasar el mouse */
-  transition: background-color 0.3s ease-in-out;
+  background-color: #e0e0e0;
+  transition: background-color 0.3s ease;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
 }
 
 /* Estilos para las secciones de acciones */
@@ -134,16 +166,19 @@ label[for="filtrar-por-menor"] {
 }
 
 /* Estilos para la sección de resumen y productos filtrados */
-.resumen-section, #productos-filtrados-texto {
+.resumen-section,
+#productos-filtrados-texto {
   background-color: #f9f9f9;
-} 
+}
 
-.resumen-section h2, #productos-filtrados-texto strong {
+.resumen-section h2,
+#productos-filtrados-texto strong {
   color: #0066cc;
   margin-bottom: 10px;
 }
 
-.resumen-section pre, #productos-filtrados-texto p {
+.resumen-section pre,
+#productos-filtrados-texto p {
   white-space: pre-wrap;
   font-size: 16px;
   background-color: #e5e5e5;
