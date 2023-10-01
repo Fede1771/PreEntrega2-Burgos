@@ -3,9 +3,28 @@ body {
   font-family: 'Arial', sans-serif;
   margin: 0;
   padding: 20px;
-  background-color: #3a2525;
   color: #333;
+  animation: changeBackgroundColor 10s infinite alternate; /* Animación de cambio de color */
 }
+
+@keyframes changeBackgroundColor {
+  0% {
+    background-color: #3a2525; /* Color inicial */
+  }
+  25% {
+    background-color: #34724a; /* Primer color de cambio */
+  }
+  50% {
+    background-color: #5c4524; /* Segundo color de cambio */
+  }
+  75% {
+    background-color: #000000; /* Tercer color de cambio */
+  }
+  100% {
+    background-color: #3a2525; /* Vuelve al color inicial */
+  }
+}
+
 
 /* Contenedor principal */
 .container {
