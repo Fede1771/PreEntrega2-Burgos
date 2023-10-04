@@ -8,6 +8,24 @@ const productosDisponibles = [
 let productosComprados = [];
 let productosFiltrados = [];
 
+
+// Función para mostrar mensajes
+function mostrarMensaje(mensaje, tipo) {
+  const mensajeElement = document.getElementById('mensaje');
+  mensajeElement.textContent = mensaje;
+  mensajeElement.className = 'mensaje';  // Limpiar clases existentes
+  mensajeElement.classList.add(tipo);
+  mensajeElement.style.display = 'block'; // Mostrar el mensaje
+  mensajeElement.style.animation = 'popup 0.5s ease forwards'; // Aplicar animación
+
+  // Ocultar el mensaje después de 3 segundos
+  setTimeout(() => {
+    mensajeElement.style.animation = ''; // Limpiar la animación
+    mensajeElement.style.display = 'none'; // Ocultar el mensaje
+  }, 3000);
+}
+
+
 // Función para renderizar la lista de productos disponibles
 function renderizarProductos() {
   const listaProductos = document.getElementById('productos-disponibles');
@@ -111,10 +129,9 @@ document.addEventListener('DOMContentLoaded', () => {
       const productoSeleccionado = productosDisponibles[seleccionProducto];
       const iva = Math.random() > 0.5 ? 1.21 : 1.1;
   
-      // Verificar si el producto ya ha sido comprado
       const productoYaComprado = productosComprados.some(item => item.nombre === productoSeleccionado.nombre);
       if (productoYaComprado) {
-        alert("Este producto ya ha sido comprado. Por favor, elige otro producto.");
+        mostrarMensaje('Este producto ya ha sido comprado. Por favor, elige otro producto.', 'mensaje-error');
         return;
       }
   
@@ -131,12 +148,11 @@ document.addEventListener('DOMContentLoaded', () => {
       mostrarResumenCompra();
       mostrarProductosFiltrados();
   
-      // Verificar si se han comprado los 4 productos
       if (productosComprados.length > 4) {
-        alert("¡Has comprado los 4 productos disponibles!");
+        mostrarMensaje('¡Has comprado los 4 productos disponibles!', 'mensaje-exito');
       }
     } else {
-      alert("Cantidad no válida. Debes ingresar una cantidad mayor que 0.");
+      mostrarMensaje('Cantidad no válida. Debes ingresar una cantidad mayor que 0.', 'mensaje-error');
     }
     localStorage.setItem('resumenCompra', JSON.stringify(productosComprados));
   });
@@ -146,8 +162,8 @@ document.addEventListener('DOMContentLoaded', () => {
     productosComprados = [];
     productosFiltrados = [];
     localStorage.removeItem('productosComprados');
-    localStorage.removeItem('resumenCompra');  // Nuevo: Borrar el resumen de compra
-    localStorage.removeItem('productosFiltrados');  // Nuevo: Borrar productos filtrados
+    localStorage.removeItem('resumenCompra');
+    localStorage.removeItem('productosFiltrados');
     mostrarResumenCompra();
     mostrarProductosFiltrados();
   });
@@ -158,7 +174,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const seleccionProducto = document.getElementById('seleccion-producto').value;
   
     if (!checkboxMayor.checked && !checkboxMenor.checked) {
-      alert("Debes seleccionar al menos un tipo de filtrado.");
+      mostrarMensaje('Debes seleccionar al menos un tipo de filtrado.', 'mensaje-error');
       return;
     }
   
@@ -181,7 +197,7 @@ document.addEventListener('DOMContentLoaded', () => {
   
       mostrarProductosFiltrados();
     } else {
-      alert("Precio no válido. Por favor, ingrese un número mayor o igual a 0.");
+      mostrarMensaje('Precio no válido. Por favor, ingrese un número mayor o igual a 0.', 'mensaje-error');
     }
     localStorage.setItem('productosFiltrados', JSON.stringify(productosFiltrados));
   });

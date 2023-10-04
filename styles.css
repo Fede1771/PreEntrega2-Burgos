@@ -231,6 +231,50 @@ label[for="filtrar-por-menor"] {
   margin-bottom: 10px;
 }
 
+/* Estilos para el mensaje */
+.mensaje {
+  display: none; /* Inicialmente oculto */
+  padding: 10px;
+  border-radius: 5px;
+  text-align: center;
+  font-weight: bold;
+  border: 1px solid #ccc; /* Agregamos un borde */
+  font-size: 16px; /* Tamaño de fuente */
+  position: fixed; /* Posición fija */
+  top: 20px; /* Espacio desde la parte superior */
+  right: 20px; /* Espacio desde la parte derecha */
+}
+
+.mensaje-exito {
+  background-color: #4CAF50; /* Color de fondo para mensajes de éxito */
+  color: white; /* Color de texto */
+}
+
+.mensaje-error {
+  background-color: #f44336; /* Color de fondo para mensajes de error */
+  color: white; /* Color de texto */
+}
+
+/* Agregamos una animación para el efecto emergente */
+@keyframes popup {
+  from {
+    opacity: 0;
+    transform: translateX(100%);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+/* Estilos adicionales para hacer la página responsive */
+@media (max-width: 600px) {
+  .mensaje {
+    top: 10px; /* Espacio desde la parte superior en dispositivos móviles */
+    right: 10px; /* Espacio desde la parte derecha en dispositivos móviles */
+  }
+}
+
 /* Estilos para hacer la página responsive */
 @media (max-width: 600px) {
   /* Modificar estilos para pantallas pequeñas */
@@ -246,3 +290,13 @@ label[for="filtrar-por-menor"] {
     width: 100%; /* Ajustar el ancho para pantallas pequeñas */
   }
 }
+
+@media (max-width: 600px) {
+  .mensaje {
+    top: 10px; /* Espacio desde la parte superior en dispositivos móviles */
+    right: 10px; /* Espacio desde la parte derecha en dispositivos móviles */
+  }
+}
+
+
+
