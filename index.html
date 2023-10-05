@@ -7,50 +7,85 @@
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-  
-  <div class="welcome-section"> <!-- Agregamos un nuevo div para la sección de bienvenida -->
+
+  <div class="welcome-section">
     <h2>Bienvenido a la tienda "Simona"</h2>
     <p>Tu tienda todo en uno para todas tus necesidades</p>
     <p>Esto tenemos en el día de hoy</p>
   </div>
-  
+
   <div class="productos-section">
-    <h2>Productos disponibles en el menu</h2>
-    <div id="productos-disponibles-container">
-      <ul id="productos-disponibles"></ul>
+    <h2>Productos disponibles en el menú</h2>
+    <div id="productos-disponibles-container" class="product-cards-container">
+      <!-- Tarjeta de producto - Manzanas -->
+      <div class="product-card">
+        <div class="product-image-container">
+          <img src="./img/Manzana.jpg" alt="Manzanas">
+        </div>
+        <div class="product-info">
+          <h3>Manzanas</h3>
+          <p>Precio: $640 por kilo</p>
+          <label for="cantidad-manzanas">Cantidad (en kilos):</label>
+          <input type="number" id="cantidad-manzanas" min="0" step="0.1" placeholder="Cantidad en kilos">
+        </div>
+        <button class="buy-button">Comprar</button>
+      </div>
+
+      <!-- Tarjeta de producto - Pan -->
+      <div class="product-card">
+        <div class="product-image-container">
+          <img src="./img/Pan.jpg" alt="Pan">
+        </div>
+        <div class="product-info">
+          <h3>Pan</h3>
+          <p>Precio: $3 por unidad</p>
+          <label for="cantidad-pan">Cantidad (en kilos):</label>
+          <input type="number" id="cantidad-pan" min="0" step="0.1" placeholder="Cantidad en kilos">
+        </div>
+        <button class="buy-button">Comprar</button>
+      </div>
+
+      <!-- Tarjeta de producto - Queso -->
+      <div class="product-card">
+        <div class="product-image-container">
+          <img src="./img/Queso.jpg" alt="Queso">
+        </div>
+        <div class="product-info">
+          <h3>Queso</h3>
+          <p>Precio: $200 por kilo</p>
+          <label for="cantidad-queso">Cantidad (en kilos):</label>
+          <input type="number" id="cantidad-queso" min="0" step="0.1" placeholder="Cantidad en kilos">
+        </div>
+        <button class="buy-button">Comprar</button>
+      </div>
+
+      <!-- Tarjeta de producto - Bananas -->
+      <div class="product-card">
+        <div class="product-image-container">
+          <img src="./img/Bananas.jpg" alt="Bananas">
+        </div>
+        <div class="product-info">
+          <h3>Bananas</h3>
+          <p>Precio: $120 por kilo</p>
+          <label for="cantidad-bananas">Cantidad (en kilos):</label>
+          <input type="number" id="cantidad-bananas" min="0" step="0.1" placeholder="Cantidad en kilos">
+        </div>
+        <button class="buy-button">Comprar</button>
+      </div>
+
     </div>
   </div>
 
-  <label for="seleccion-producto">Selecciona un producto:</label>
-  <select id="seleccion-producto">
-    <option value="0">Manzanas</option>
-    <option value="1">Bananas</option>
-    <option value="2">Queso</option>
-    <option value="3">Pan</option>
-  </select>
-
-  <label for="cantidad-producto">Cantidad (en kilos):</label>
-  <input type="number" id="cantidad-producto" min="0" step="0.1" placeholder="Cantidad en kilos">
-
-
-
-  <button id="comprar-btn">Comprar</button>
-  
-  
-
   <label for="precio-filtro">Ingrese el precio para filtrar los productos (+ IVA): </label>
-<input type="number" id="precio-filtro" placeholder="Precio para filtrar" step="0.01">
-
+  <input type="number" id="precio-filtro" placeholder="Precio para filtrar" step="0.01">
 
   <label for="filtrar-por-mayor">Filtrar por mayor:</label>
   <input type="checkbox" id="filtrar-por-mayor">
 
-  
   <label for="filtrar-por-menor">Filtrar por menor:</label>
   <input type="checkbox" id="filtrar-por-menor">
 
   <button id="filtrar-btn">Filtrar</button>
-  
 
   <h2>Resumen de compra</h2>
   <div id="resumen-compra" class="resumen-section"></div>
@@ -61,7 +96,6 @@
   </div>
 
   <div id="mensaje" class="mensaje"></div>
-
 
   <button id="limpiar-btn">Limpiar</button>
 

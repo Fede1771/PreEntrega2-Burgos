@@ -1,32 +1,29 @@
-/* Estilos generales para la página */
 body {
   font-family: 'Arial', sans-serif;
   margin: 0;
   padding: 20px;
   color: #333;
-  animation: changeBackgroundColor 10s infinite alternate; /* Animación de cambio de color */
+  animation: changeBackgroundColor 10s infinite alternate;
 }
 
 @keyframes changeBackgroundColor {
   0% {
-    background-color: #3a2525; /* Color inicial */
+    background-color: #3a2525;
   }
   25% {
-    background-color: #284639; /* Primer color de cambio */
+    background-color: #284639;
   }
   50% {
-    background-color: #5c4524; /* Segundo color de cambio */
+    background-color: #5c4524;
   }
   75% {
-    background-color: #000000; /* Tercer color de cambio */
+    background-color: #000000;
   }
   100% {
-    background-color: #3a2525; /* Vuelve al color inicial */
+    background-color: #3a2525;
   }
 }
 
-
-/* Contenedor principal */
 .container {
   max-width: 800px;
   margin: 0 auto;
@@ -36,22 +33,19 @@ body {
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
-/* Estilos para títulos */
 h1, h2 {
   color: #0066cc;
   font-family: 'Helvetica', sans-serif;
 }
 
-/* Estilos para etiquetas */
 label {
   display: block;
   margin-bottom: 5px;
   font-weight: bold;
 }
 
-/* Estilos para menú de selección */
 select {
-  width: 50%; /* Ahora es 100% del contenedor padre */
+  width: 50%;
   padding: 8px;
   margin-bottom: 10px;
   border: 1px solid #ccc;
@@ -59,10 +53,8 @@ select {
   font-size: 16px;
 }
 
-/* Estilos para botones */
 button {
   padding: 10px 20px;
-  margin-left: 10px;
   border: none;
   border-radius: 5px;
   color: #fff;
@@ -74,17 +66,13 @@ button {
 
 button:hover {
   background-color: #0050a3;
-  transition: background-color 0.3s ease;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
 }
 
-/* Animación al hacer clic en el botón */
 button:active {
   transform: translateY(3px) rotate(-3deg);
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
 }
 
-/* Estilos para la sección de bienvenida */
 .welcome-section {
   background-color: #f9f9f9;
   padding: 20px;
@@ -93,22 +81,22 @@ button:active {
   max-width: 600px;
   margin: 0 auto;
   animation: fadeInUp 1s forwards;
-  text-align: center; /* Alineación del texto al centro */
-  transform: translateY(0); /* Ajuste de la posición inicial */
+  text-align: center;
+  transform: translateY(0);
 }
 
 .welcome-section h2 {
   color: #0066cc;
   margin-bottom: 10px;
   text-transform: uppercase;
-  font-size: 24px; /* Tamaño de fuente aumentado */
+  font-size: 24px;
 }
 
 .welcome-section p {
   font-size: 18px;
   color: #444;
   line-height: 1.6;
-  font-weight: bold; /* Fuente en negrita */
+  font-weight: bold;
 }
 
 .welcome-section:hover {
@@ -116,7 +104,6 @@ button:active {
   transition: background-color 0.3s ease;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
 }
-
 
 @keyframes fadeInUp {
   from {
@@ -129,15 +116,14 @@ button:active {
   }
 }
 
-/* Sección de resumen */
 .resumen-section {
   border: 1px solid #ccc;
-  padding: 10px;
+  padding: 20px; /* Ajustado para más espacio */
   border-radius: 10px;
   margin-bottom: 20px;
+  background-color: #f9f9f9; /* Fondo blanco */
 }
 
-/* Estilos específicos para la sección de productos disponibles */
 .productos-section {
   margin-bottom: 20px;
   text-align: center;
@@ -145,27 +131,33 @@ button:active {
   margin: 0 auto;
 }
 
+.product-card img {
+  width: 100%; /* La imagen ocupará el 100% del espacio disponible */
+  height: auto; /* Mantenemos la relación de aspecto */
+  border-radius: 10px;
+  object-fit: cover; /* La imagen se ajustará manteniendo su relación de aspecto y cubriendo todo el espacio */
+  max-height: 200px; /* Establecemos una altura máxima para evitar imágenes excesivamente grandes */
+}
+
+
 .productos-section h2 {
   color: #0066cc;
   margin-bottom: 10px;
   text-transform: uppercase;
 }
 
-/* Estilos para etiquetas de selección de producto y cantidad */
 label[for="seleccion-producto"],
 label[for="cantidad-producto"] {
   color: #0066cc;
 }
 
-/* Estilo para los labels */
 label {
-  display: inline-block; /* Mostrar en línea y respetar márgenes */
+  display: inline-block;
   margin-right: 10px;
-  margin-left: 10px; /* Espacio a la derecha para separar los labels */
-  color: #0066cc; /* Color de texto negro */
+  margin-left: 10px;
+  color: #0066cc;
 }
 
-/* Ajuste para que los labels estén alineados verticalmente con los elementos de entrada */
 label[for="seleccion-producto"],
 label[for="cantidad-producto"],
 label[for="filtrar-por-mayor"],
@@ -173,89 +165,82 @@ label[for="filtrar-por-menor"] {
   vertical-align: middle;
 }
 
-/* Lista de productos disponibles */
-#productos-disponibles {
-  list-style: none;
-  padding: 0;
-  margin: 0;
-  max-width: 200px; /* Establece la anchura máxima que desees */
-  overflow-x: hidden; /* Oculta el desplazamiento horizontal si es necesario */
-  overflow-y: auto; /* Agrega un desplazamiento vertical si es necesario */
+#productos-disponibles-container {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  max-width: 100%; /* Cambiado de 800px a 100% */
+  margin: 0 auto;
+  margin-bottom: 20px;
 }
 
-#productos-disponibles li {
-  margin-bottom: 10px;
-  padding: 10px;
-  background-color: #f9f9f9;
+.product-card {
+  padding: 20px;
+  flex: 1; /* Para que ocupen el espacio disponible */
+  border: 1px solid #ccc;
   border-radius: 10px;
-  box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
-  transition: background-color 0.3s ease;
-  text-align: center; /* Alinea el texto al centro */
-  width: 100%; /* Establece el ancho al 100% del contenedor */
+  background-color: #fff;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  text-align: center; /* Centrar el contenido dentro de la tarjeta */
 }
 
-#productos-disponibles li:hover {
-  background-color: #e0e0e0;
-  transition: background-color 0.3s ease;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+.product-card img {
+  height: 200px; /* Establecemos una altura fija */
+  width: 200px; /* Mantenemos la relación de aspecto */
+  border-radius: 10px;
+  object-fit: cover;
 }
 
-/* Estilos para las secciones de acciones */
-.acciones-section button {
-  margin-right: 10px;
-}
-
-/* Estilos para la sección de resumen y productos filtrados */
-.resumen-section,
-#productos-filtrados-texto {
-  background-color: #f9f9f9;
-}
-
-.resumen-section h2,
-#productos-filtrados-texto strong {
-  color: #0066cc;
+.product-card h3 {
+  font-size: 18px;
   margin-bottom: 10px;
 }
 
-.resumen-section pre,
-#productos-filtrados-texto p {
-  white-space: pre-wrap;
+.product-card p {
   font-size: 16px;
-  background-color: #e5e5e5;
-  padding: 10px;
-  border-radius: 5px;
-}
-
-#productos-filtrados-texto strong {
-  display: block;
   margin-bottom: 10px;
 }
 
-/* Estilos para el mensaje */
+.product-card button {
+  margin-top: 10px; /* Agregamos un margen en la parte superior del botón */
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  color: #fff;
+  background-color: #0066cc;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  font-size: 16px;
+}
+
+.product-card button:hover {
+  background-color: #0050a3;
+}
+
 .mensaje {
-  display: none; /* Inicialmente oculto */
+  display: none;
   padding: 10px;
   border-radius: 5px;
   text-align: center;
   font-weight: bold;
-  border: 1px solid #ccc; /* Agregamos un borde */
-  font-size: 16px; /* Tamaño de fuente */
-  position: fixed; /* Posición fija */
-  top: 20px; /* Espacio desde la parte superior */
-  right: 20px; /* Espacio desde la parte derecha */
+  border: 1px solid #ccc;
+  font-size: 16px;
+  position: fixed;
+  top: 20px;
+  right: 20px;
 }
 
 .mensaje-exito {
-  background-color: #4CAF50; /* Color de fondo para mensajes de éxito */
-  color: white; /* Color de texto */
+  background-color: #4CAF50;
+  color: white;
 }
 
 .mensaje-error {
-  background-color: #f44336; /* Color de fondo para mensajes de error */
-  color: white; /* Color de texto */
+  background-color: #f44336;
+  color: white;
 }
 
-/* Agregamos una animación para el efecto emergente */
+
 @keyframes popup {
   from {
     opacity: 0;
@@ -270,33 +255,21 @@ label[for="filtrar-por-menor"] {
 /* Estilos adicionales para hacer la página responsive */
 @media (max-width: 600px) {
   .mensaje {
-    top: 10px; /* Espacio desde la parte superior en dispositivos móviles */
-    right: 10px; /* Espacio desde la parte derecha en dispositivos móviles */
+    top: 10px;
+    right: 10px;
   }
 }
 
-/* Estilos para hacer la página responsive */
 @media (max-width: 600px) {
-  /* Modificar estilos para pantallas pequeñas */
   .container {
     padding: 10px;
   }
 
   select {
-    width: 100%; /* Ajustar el ancho para pantallas pequeñas */
+    width: 100%;
   }
 
   button {
-    width: 100%; /* Ajustar el ancho para pantallas pequeñas */
+    width: 100%;
   }
 }
-
-@media (max-width: 600px) {
-  .mensaje {
-    top: 10px; /* Espacio desde la parte superior en dispositivos móviles */
-    right: 10px; /* Espacio desde la parte derecha en dispositivos móviles */
-  }
-}
-
-
-
