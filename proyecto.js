@@ -222,4 +222,5 @@ document.addEventListener('DOMContentLoaded', () => {
     productosFiltrados = JSON.parse(productosFiltradosString);
     mostrarProductosFiltrados();
   }
+  
 });
