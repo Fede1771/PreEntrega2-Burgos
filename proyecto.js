@@ -8,6 +8,7 @@ const productosDisponibles = [
 let productosComprados = [];
 let productosFiltrados = [];
 
+
 function mostrarMensaje(mensaje, tipo) {
   const mensajeElement = document.getElementById('mensaje');
   mensajeElement.textContent = mensaje;
