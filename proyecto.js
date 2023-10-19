@@ -8,20 +8,13 @@ const productosDisponibles = [
 let productosComprados = [];
 let productosFiltrados = [];
 
-
-
 function mostrarMensaje(mensaje, tipo) {
-  const mensajeElement = document.getElementById('mensaje');
-  mensajeElement.textContent = mensaje;
-  mensajeElement.className = 'mensaje';
-  mensajeElement.classList.add(tipo);
-  mensajeElement.style.display = 'block';
-  mensajeElement.style.animation = 'popup 0.5s ease forwards';
-
-  setTimeout(() => {
-    mensajeElement.style.animation = '';
-    mensajeElement.style.display = 'none';
-  }, 3000);
+  Swal.fire({
+    title: mensaje,
+    icon: tipo === 'mensaje-error' ? 'error' : 'success',
+    timer: 3000,
+    showConfirmButton: false
+  });
 }
 
 function renderizarProductos() {
@@ -102,7 +95,6 @@ function mostrarProductosFiltrados() {
     productosFiltradosTexto.appendChild(ul);
   }
 }
-
 
 function calcularPrecioConIva(precio, cantidad, iva) {
   const precioSinIva = precio * cantidad;
@@ -209,7 +201,19 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   });
 
-  limpiarBtn.addEventListener('click', limpiarCarritoYFiltrados);
+  limpiarBtn.addEventListener('click', () => {
+    if (productosComprados.length === 0 && productosFiltrados.length === 0) {
+      // Si no hay nada que limpiar, muestra un SweetAlert
+      Swal.fire({
+        title: 'Nada que limpiar',
+        text: 'Tu carrito de compras y la lista de productos filtrados ya están vacíos.',
+        icon: 'error',
+      });
+    } else {
+      // Si hay algo que limpiar, realiza la limpieza
+      limpiarCarritoYFiltrados();
+    }
+  });
 
   // Mostrar Resumen de compra almacenado en localStorage
   const productosCompradosString = localStorage.getItem('productosComprados');
@@ -224,5 +228,4 @@ document.addEventListener('DOMContentLoaded', () => {
     productosFiltrados = JSON.parse(productosFiltradosString);
     mostrarProductosFiltrados();
   }
-  
 });
