@@ -131,11 +131,24 @@ function agregarProductoAlCarrito(index) {
     if (productosComprados.length > 4) {
       mostrarMensaje('¡Has comprado los 4 productos disponibles!', 'mensaje-exito');
     }
+
+    // Agregar un mensaje de notificación Toastify
+    Toastify({
+      text: 'Agregado al carrito',
+      duration: 3000,
+      gravity: 'center',
+      style: {
+        background: 'green',
+        color: 'white',
+      },
+    }).showToast();
+    
   } else {
     mostrarMensaje('Cantidad no válida. Debes ingresar una cantidad mayor que 0.', 'mensaje-error');
   }
   localStorage.setItem('resumenCompra', JSON.stringify(productosComprados));
 }
+
 
 function limpiarCarritoYFiltrados() {
   productosComprados = [];
