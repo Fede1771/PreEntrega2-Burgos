@@ -33,16 +33,16 @@
         <button class="buy-button">Comprar</button>
       </div>
 
-      <!-- Tarjeta de producto - Pan -->
+      <!-- Tarjeta de producto - Bananas -->
       <div class="product-card">
         <div class="product-image-container">
-          <img src="./img/Pan.jpg" alt="Pan">
+          <img src="./img/Bananas.jpg" alt="Bananas">
         </div>
         <div class="product-info">
-          <h3>Pan</h3>
-          <p>Precio: $3 por unidad</p>
-          <label for="cantidad-pan">Cantidad (en kilos):</label>
-          <input type="number" id="cantidad-pan" min="0" step="0.1" placeholder="Cantidad en kilos">
+          <h3>Bananas</h3>
+          <p>Precio: $120 por kilo</p>
+          <label for="cantidad-bananas">Cantidad (en kilos):</label>
+          <input type="number" id="cantidad-bananas" min="0" step="0.1" placeholder="Cantidad en kilos">
         </div>
         <button class="buy-button">Comprar</button>
       </div>
@@ -61,16 +61,16 @@
         <button class="buy-button">Comprar</button>
       </div>
 
-      <!-- Tarjeta de producto - Bananas -->
+      <!-- Tarjeta de producto - Pan -->
       <div class="product-card">
         <div class="product-image-container">
-          <img src="./img/Bananas.jpg" alt="Bananas">
+          <img src="./img/Pan.jpg" alt="Pan">
         </div>
         <div class="product-info">
-          <h3>Bananas</h3>
-          <p>Precio: $120 por kilo</p>
-          <label for="cantidad-bananas">Cantidad (en kilos):</label>
-          <input type="number" id="cantidad-bananas" min="0" step="0.1" placeholder="Cantidad en kilos">
+          <h3>Pan</h3>
+          <p>Precio: $3 por unidad</p>
+          <label for="cantidad-pan">Cantidad (en kilos):</label>
+          <input type="number" id="cantidad-pan" min="0" step="0.1" placeholder="Cantidad en kilos">
         </div>
         <button class="buy-button">Comprar</button>
       </div>
@@ -78,16 +78,19 @@
     </div>
   </div>
 
-  <label for="precio-filtro">Ingrese el precio para filtrar los productos (+ IVA): </label>
-  <input type="number" id="precio-filtro" placeholder="Precio para filtrar" step="0.01">
-
-  <label for="filtrar-por-mayor">Filtrar por mayor:</label>
-  <input type="checkbox" id="filtrar-por-mayor">
-
-  <label for="filtrar-por-menor">Filtrar por menor:</label>
-  <input type="checkbox" id="filtrar-por-menor">
-
-  <button id="filtrar-btn">Filtrar</button>
+  <div class="filtro-container">
+    <label for="precio-filtro">Ingrese el precio para filtrar los productos (+ IVA): </label>
+    <input type="number" id="precio-filtro" placeholder="Precio para filtrar" step="0.01">
+  
+    <label for="filtrar-por-mayor">Filtrar por mayor:</label>
+    <input type="checkbox" id="filtrar-por-mayor">
+  
+    <label for "filtrar-por-menor">Filtrar por menor:</label>
+    <input type="checkbox" id="filtrar-por-menor">
+  
+    <button id="filtrar-btn">Filtrar</button>
+  </div>
+  
 
   <h2>Resumen de compra</h2>
   <div id="resumen-compra" class="resumen-section"></div>

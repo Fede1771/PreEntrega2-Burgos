@@ -1,3 +1,4 @@
+/* Estilos base */
 body {
   font-family: 'Arial', sans-serif;
   margin: 0;
@@ -25,8 +26,8 @@ body {
 }
 
 .container {
-  max-width: 800px;
-  margin: 0 auto;
+  max-width: 100%;
+  margin: 0;
   background-color: #fff;
   padding: 20px;
   border-radius: 10px;
@@ -56,6 +57,7 @@ select {
 button {
   padding: 10px 20px;
   border: none;
+  margin-top: 8px;
   border-radius: 5px;
   color: #fff;
   background-color: #0066cc;
@@ -105,23 +107,12 @@ button:active {
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
 }
 
-@keyframes fadeInUp {
-  from {
-    opacity: 0;
-    transform: translateY(20px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
 .resumen-section {
   border: 1px solid #ccc;
-  padding: 20px; /* Ajustado para más espacio */
+  padding: 20px;
   border-radius: 10px;
   margin-bottom: 20px;
-  background-color: #f9f9f9; /* Fondo blanco */
+  background-color: #f9f9f9;
 }
 
 .productos-section {
@@ -131,14 +122,35 @@ button:active {
   margin: 0 auto;
 }
 
-.product-card img {
-  width: 100%; /* La imagen ocupará el 100% del espacio disponible */
-  height: auto; /* Mantenemos la relación de aspecto */
-  border-radius: 10px;
-  object-fit: cover; /* La imagen se ajustará manteniendo su relación de aspecto y cubriendo todo el espacio */
-  max-height: 200px; /* Establecemos una altura máxima para evitar imágenes excesivamente grandes */
+#productos-disponibles-container {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  max-width: 100%;
+  margin: 0 auto;
+  margin-bottom: 20px;
 }
 
+.product-card {
+  padding: 20px;
+  flex: 1;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  background-color: #fff;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  width: calc(50% - 20px);
+  margin-bottom: 20px;
+  transition: width 0.3s;
+}
+
+.product-card img {
+  width: 250px;
+  height: 100%;
+  border-radius: 10px;
+  object-fit: fill;
+  max-height: 200px;
+}
 
 .productos-section h2 {
   color: #0066cc;
@@ -165,46 +177,41 @@ label[for="filtrar-por-menor"] {
   vertical-align: middle;
 }
 
-#productos-disponibles-container {
-  display: flex;
-  justify-content: center;
-  gap: 20px;
-  max-width: 100%; /* Cambiado de 800px a 100% */
-  margin: 0 auto;
-  margin-bottom: 20px;
-}
-
-.product-card {
+/* Estilos para el contenedor de filtros */
+.filtro-container {
+  background-color: #f9f9f9;
   padding: 20px;
-  flex: 1; /* Para que ocupen el espacio disponible */
+  border-radius: 10px;
+  margin-bottom: 20px;
+  max-width: 600px;
+  margin: 0 auto;
+  text-align: center;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+}
+
+.filtro-container label {
+  display: block;
+  margin-bottom: 5px;
+  color: #0066cc;
+}
+
+.filtro-container input[type="number"] {
+  width: 50%;
+  padding: 8px;
+  margin-bottom: 10px;
   border: 1px solid #ccc;
-  border-radius: 10px;
-  background-color: #fff;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-  text-align: center; /* Centrar el contenido dentro de la tarjeta */
-}
-
-.product-card img {
-  height: 200px; /* Establecemos una altura fija */
-  width: 200px; /* Mantenemos la relación de aspecto */
-  border-radius: 10px;
-  object-fit: cover;
-}
-
-.product-card h3 {
-  font-size: 18px;
-  margin-bottom: 10px;
-}
-
-.product-card p {
+  border-radius: 5px;
   font-size: 16px;
-  margin-bottom: 10px;
 }
 
-.product-card button {
-  margin-top: 10px; /* Agregamos un margen en la parte superior del botón */
+.filtro-container input[type="checkbox"] {
+  margin-right: 5px;
+}
+
+.filtro-container button {
   padding: 10px 20px;
   border: none;
+  margin-top: 8px;
   border-radius: 5px;
   color: #fff;
   background-color: #0066cc;
@@ -213,54 +220,17 @@ label[for="filtrar-por-menor"] {
   font-size: 16px;
 }
 
-.product-card button:hover {
+.filtro-container button:hover {
   background-color: #0050a3;
 }
 
-.mensaje {
-  display: none;
-  padding: 10px;
-  border-radius: 5px;
-  text-align: center;
-  font-weight: bold;
-  border: 1px solid #ccc;
-  font-size: 16px;
-  position: fixed;
-  top: 20px;
-  right: 20px;
+.filtro-container button:active {
+  transform: translateY(3px) rotate(-3deg);
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
 }
 
-.mensaje-exito {
-  background-color: #4CAF50;
-  color: white;
-}
-
-.mensaje-error {
-  background-color: #f44336;
-  color: white;
-}
-
-
-@keyframes popup {
-  from {
-    opacity: 0;
-    transform: translateX(100%);
-  }
-  to {
-    opacity: 1;
-    transform: translateX(0);
-  }
-}
-
-/* Estilos adicionales para hacer la página responsive */
-@media (max-width: 600px) {
-  .mensaje {
-    top: 10px;
-    right: 10px;
-  }
-}
-
-@media (max-width: 600px) {
+/* Estilos para pantallas más pequeñas, como dispositivos móviles */
+@media (max-width: 768px) {
   .container {
     padding: 10px;
   }
@@ -272,4 +242,36 @@ label[for="filtrar-por-menor"] {
   button {
     width: 100%;
   }
+
+  .product-card {
+    width: auto;
+    flex: none;
+  }
+
+  #productos-disponibles-container {
+    flex-direction: column;
+  }
 }
+
+/* Estilos para pantallas más grandes, como PC */
+@media (min-width: 769px) {
+  .filtro-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center; /* Centra horizontalmente los elementos */
+    align-items: center; /* Centra verticalmente los elementos */
+  }
+
+  .filtro-container label,
+  .filtro-container input[type="checkbox"] {
+    flex-basis: 48%; /* Distribuye los elementos en dos columnas */
+  }
+
+  .filtro-container button {
+    flex-basis: 100%; /* Toma el ancho completo de la fila */
+  }
+}
+
+
+
+
