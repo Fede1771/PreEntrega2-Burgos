@@ -229,6 +229,53 @@ label[for="filtrar-por-menor"] {
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
 }
 
+/* Estilos para el pie de página */
+.piepagina {
+  background-color: #f9f9f9;
+  padding: 20px;
+  border-radius: 10px;
+  margin-top: 20px;
+  text-align: center;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+  display: flex; /* Utilizamos Flexbox para la disposición */
+  justify-content: space-between; /* Separa el contenido en dos columnas */
+  align-items: center; /* Centra verticalmente el contenido */
+}
+
+.texto-informativo {
+  max-width: 600px;
+  color: #333;
+}
+
+.texto-informativo h4 {
+  color: #0066cc;
+  font-size: 20px;
+  margin-bottom: 10px;
+}
+
+.texto-informativo p {
+  font-size: 16px;
+  color: #444;
+  line-height: 1.6;
+  font-weight: bold;
+}
+
+.redes-sociales {
+  margin-top: 20px;
+}
+
+.redes-sociales a {
+  margin: 0 10px;
+  display: inline-block;
+}
+
+.redes-sociales img {
+  width: 48px;
+  height: auto;
+}
+
+
+
 /* Estilos para pantallas más pequeñas, como dispositivos móviles */
 @media (max-width: 767px) {
   .container {
@@ -250,6 +297,13 @@ label[for="filtrar-por-menor"] {
 
   #productos-disponibles-container {
     flex-direction: column;
+  }
+  .texto-informativo {
+    padding: 0 10px;
+  }
+
+  .redes-sociales {
+    margin: 20px 0;
   }
 }
 
@@ -274,6 +328,13 @@ label[for="filtrar-por-menor"] {
 
   #productos-disponibles-container {
     flex-direction: column;
+  }
+  .texto-informativo {
+    padding: 0 10px;
+  }
+
+  .redes-sociales {
+    margin: 20px 0;
   }
 }
 
