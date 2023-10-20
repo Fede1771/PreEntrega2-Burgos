@@ -230,7 +230,31 @@ label[for="filtrar-por-menor"] {
 }
 
 /* Estilos para pantallas más pequeñas, como dispositivos móviles */
-@media (max-width: 768px) {
+@media (max-width: 767px) {
+  .container {
+    padding: 10px;
+  }
+
+  select {
+    width: 100%;
+  }
+
+  button {
+    width: 100%;
+  }
+
+  .product-card {
+    width: auto;
+    flex: none;
+  }
+
+  #productos-disponibles-container {
+    flex-direction: column;
+  }
+}
+
+/* Estilos para pantallas medianas, como tabletas */
+@media (min-width: 768px) and (max-width: 1023px) {
   .container {
     padding: 10px;
   }
@@ -254,7 +278,7 @@ label[for="filtrar-por-menor"] {
 }
 
 /* Estilos para pantallas más grandes, como PC */
-@media (min-width: 769px) {
+@media (min-width: 1024px) {
   .filtro-container {
     display: flex;
     flex-wrap: wrap;
