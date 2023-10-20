@@ -1,12 +1,6 @@
-const productosDisponibles = [
-  { nombre: 'Manzanas', precio: 640, imagen: 'Manzana.jpg' },
-  { nombre: 'Bananas', precio: 350, imagen: 'Banana.jpg' },
-  { nombre: 'Queso', precio: 125, imagen: 'Queso.jpg' },
-  { nombre: 'Pan', precio: 800, imagen: 'Pan.jpg' }
-];
-
 let productosComprados = [];
 let productosFiltrados = [];
+let productos; // Variable para almacenar los productos
 
 function mostrarMensaje(mensaje, tipo) {
   Swal.fire({
@@ -21,41 +15,54 @@ function renderizarProductos() {
   const productosContainer = document.getElementById('productos-disponibles-container');
   productosContainer.innerHTML = '';
 
-  productosDisponibles.forEach((producto, index) => {
-    const productCard = document.createElement('div');
-    productCard.classList.add('product-card');
+  fetch('productos.json') // Ruta al archivo JSON local
+    .then(response => {
+      if (!response.ok) {
+        throw new Error('No se pudo cargar el archivo JSON.');
+      }
+      return response.json();
+    })
+    .then(data => {
+      productos = data; // Almacenamos los productos en la variable
+      data.forEach((producto, index) => {
+        const productCard = document.createElement('div');
+        productCard.classList.add('product-card');
 
-    const imagen = document.createElement('img');
-    imagen.src = `img/${producto.imagen}`;
-    imagen.alt = `${producto.nombre}`;
-    productCard.appendChild(imagen);
+        const imagen = document.createElement('img');
+        imagen.src = `img/${producto.imagen}`;
+        imagen.alt = producto.nombre;
+        productCard.appendChild(imagen);
 
-    const nombre = document.createElement('h3');
-    nombre.textContent = producto.nombre;
-    productCard.appendChild(nombre);
+        const nombre = document.createElement('h3');
+        nombre.textContent = producto.nombre;
+        productCard.appendChild(nombre);
 
-    const precio = document.createElement('p');
-    precio.textContent = `Precio: $${producto.precio}`;
-    productCard.appendChild(precio);
+        const precio = document.createElement('p');
+        precio.textContent = `Precio: $${producto.precio}`;
+        productCard.appendChild(precio);
 
-    const cantidadLabel = document.createElement('label');
-    cantidadLabel.textContent = 'Cantidad (en kilos):';
-    const cantidadInput = document.createElement('input');
-    cantidadInput.type = 'number';
-    cantidadInput.min = '0';
-    cantidadInput.step = '0.1';
-    cantidadInput.placeholder = 'Cantidad en kilos';
-    cantidadInput.id = `cantidad-${index}`;
-    productCard.appendChild(cantidadLabel);
-    productCard.appendChild(cantidadInput);
+        const cantidadLabel = document.createElement('label');
+        cantidadLabel.textContent = 'Cantidad (en kilos):';
+        const cantidadInput = document.createElement('input');
+        cantidadInput.type = 'number';
+        cantidadInput.min = '0';
+        cantidadInput.step = '0.1';
+        cantidadInput.placeholder = 'Cantidad en kilos';
+        cantidadInput.id = `cantidad-${index}`;
+        productCard.appendChild(cantidadLabel);
+        productCard.appendChild(cantidadInput);
 
-    const button = document.createElement('button');
-    button.textContent = 'Agregar al carrito';
-    button.addEventListener('click', () => agregarProductoAlCarrito(index));
-    productCard.appendChild(button);
+        const button = document.createElement('button');
+        button.textContent = 'Agregar al carrito';
+        button.addEventListener('click', () => agregarProductoAlCarrito(index));
+        productCard.appendChild(button);
 
-    productosContainer.appendChild(productCard);
-  });
+        productosContainer.appendChild(productCard);
+      });
+    })
+    .catch(error => {
+      console.error(error);
+    });
 }
 
 function mostrarResumenCompra() {
@@ -106,7 +113,7 @@ function agregarProductoAlCarrito(index) {
   const cantidadProducto = parseFloat(document.getElementById(`cantidad-${index}`).value);
 
   if (!isNaN(cantidadProducto) && cantidadProducto > 0) {
-    const productoSeleccionado = productosDisponibles[index];
+    const productoSeleccionado = productos[index]; // Obtener el producto del array cargado desde el JSON
     const iva = Math.random() > 0.5 ? 1.21 : 1.1;
 
     const productoYaComprado = productosComprados.some(item => item.nombre === productoSeleccionado.nombre);
@@ -149,7 +156,6 @@ function agregarProductoAlCarrito(index) {
   localStorage.setItem('resumenCompra', JSON.stringify(productosComprados));
 }
 
-
 function limpiarCarritoYFiltrados() {
   productosComprados = [];
   productosFiltrados = [];
@@ -181,19 +187,32 @@ filtrarBtn.addEventListener('click', () => {
   const filtroMayor = checkboxMayor.checked;
   const filtroMenor = checkboxMenor.checked;
 
-  productosFiltrados = productosComprados.filter(producto => {
-    if (filtroMayor && producto.precioConIva > precioFiltro) {
-      return true;
-    }
-    if (filtroMenor && producto.precioConIva < precioFiltro) {
+  const hayElementosParaFiltrar = productosComprados.some(producto => {
+    if ((filtroMayor && producto.precioConIva > precioFiltro) || (filtroMenor && producto.precioConIva < precioFiltro)) {
       return true;
     }
     return false;
   });
 
-  mostrarProductosFiltrados();
-  localStorage.setItem('productosFiltrados', JSON.stringify(productosFiltrados));
+  if (!hayElementosParaFiltrar) {
+    Swal.fire({
+      title: 'No hay nada para filtrar',
+      text: 'No se encontraron productos que cumplan con los criterios de filtrado.',
+      icon: 'error',
+    });
+  } else {
+    productosFiltrados = productosComprados.filter(producto => {
+      if ((filtroMayor && producto.precioConIva > precioFiltro) || (filtroMenor && producto.precioConIva < precioFiltro)) {
+        return true;
+      }
+      return false;
+    });
+
+    mostrarProductosFiltrados();
+    localStorage.setItem('productosFiltrados', JSON.stringify(productosFiltrados));
+  }
 });
+
 
 document.addEventListener('DOMContentLoaded', () => {
   renderizarProductos();

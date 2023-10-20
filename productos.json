@@ -1,0 +1,7 @@
+[
+    { "nombre": "Manzanas", "precio": 640, "imagen": "Manzana.jpg" },
+    { "nombre": "Bananas", "precio": 350, "imagen": "Banana.jpg" },
+    { "nombre": "Queso", "precio": 125, "imagen": "Queso.jpg" },
+    { "nombre": "Pan", "precio": 800, "imagen": "Pan.jpg" }
+  ]
+  
