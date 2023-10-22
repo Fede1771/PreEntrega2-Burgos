@@ -242,36 +242,37 @@ label[for="filtrar-por-menor"] {
   align-items: center; /* Centra verticalmente el contenido */
 }
 
-.texto-informativo {
-  max-width: 600px;
-  color: #333;
+.texto-informativo, .suscripcion {
+  flex: 1;
+  padding: 20px;
+  text-align: center;
 }
 
-.texto-informativo h4 {
+.texto-informativo h4, .suscripcion h4 {
   color: #0066cc;
   font-size: 20px;
   margin-bottom: 10px;
 }
 
-.texto-informativo p {
+.texto-informativo p, .suscripcion p {
   font-size: 16px;
   color: #444;
   line-height: 1.6;
   font-weight: bold;
 }
 
-.redes-sociales {
-  margin-top: 20px;
+.suscripcion form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
-.redes-sociales a {
-  margin: 0 10px;
-  display: inline-block;
+.suscripcion input[type="email"] {
+  margin-bottom: 10px; /* Añade margen en la parte inferior */
 }
 
-.redes-sociales img {
-  width: 48px;
-  height: auto;
+.suscripcion button {
+  margin-top: 10px; /* Añade margen en la parte superior */
 }
 
 
