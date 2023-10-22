@@ -34,6 +34,61 @@ body {
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
+/* Estilos para el menú de navegación */
+header {
+  background-color: #f9f9f9;
+  padding: 10px 0;
+  position: relative;
+  margin-bottom: 20px;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/* Estilos para el logo */
+.logo {
+  text-align: right;
+  position: absolute;
+  right: 20px;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.logo img {
+  max-width: 100%;
+  height: 100px;
+}
+
+/* Estilos para el menú de navegación */
+header nav {
+  text-align: left;
+}
+
+header nav ul {
+  list-style: none;
+  padding: 0;
+  text-align: center;
+}
+
+header nav li {
+  display: inline;
+  margin: 0 10px;
+}
+
+header nav a {
+  text-decoration: none;
+  color: #444;
+  font-weight: bold;
+}
+
+/* Cambia el color del enlace cuando el mouse está sobre él */
+header nav a:hover {
+  color: #ff9900;
+}
+
+
 h1, h2 {
   color: #0066cc;
   font-family: 'Helvetica', sans-serif;
@@ -275,8 +330,6 @@ label[for="filtrar-por-menor"] {
   margin-top: 10px; /* Añade margen en la parte superior */
 }
 
-
-
 /* Estilos para pantallas más pequeñas, como dispositivos móviles */
 @media (max-width: 767px) {
   .container {
@@ -303,8 +356,12 @@ label[for="filtrar-por-menor"] {
     padding: 0 10px;
   }
 
-  .redes-sociales {
-    margin: 20px 0;
+  /* Nuevos estilos para dispositivos móviles */
+  .texto-informativo,
+  .suscripcion {
+    flex: 1;
+    width: 100%;
+    text-align: center;
   }
 }
 
@@ -334,8 +391,14 @@ label[for="filtrar-por-menor"] {
     padding: 0 10px;
   }
 
-  .redes-sociales {
-    margin: 20px 0;
+  /* Nuevos estilos para tabletas */
+  .texto-informativo, .suscripcion {
+    flex: 1;
+    width: 50%;
+    text-align: center;
+  }
+  .suscripcion {
+    text-align: right;
   }
 }
 
@@ -356,8 +419,15 @@ label[for="filtrar-por-menor"] {
   .filtro-container button {
     flex-basis: 100%; /* Toma el ancho completo de la fila */
   }
+
+  /* Nuevos estilos para PC */
+  .texto-informativo, .suscripcion {
+    flex: 1;
+    width: auto;
+    text-align: center;
+  }
+  .suscripcion {
+    text-align: center;
+  }
 }
-
-
-
 
