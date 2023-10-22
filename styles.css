@@ -34,7 +34,7 @@ body {
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
-/* Estilos para el menú de navegación */
+/* Estilos para el header */
 header {
   background-color: #f9f9f9;
   padding: 10px 0;
@@ -43,17 +43,13 @@ header {
   border-radius: 10px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
   display: flex;
-  justify-content: space-between;
-  align-items: center;
+  justify-content: space-between; /* Coloca el logo a la derecha y los enlaces a la izquierda */
+  align-items: center; /* Centra verticalmente el contenido */
 }
 
 /* Estilos para el logo */
 .logo {
-  text-align: right;
-  position: absolute;
-  right: 20px;
-  top: 50%;
-  transform: translateY(-50%);
+  order: 3; /* Cambia el orden para que esté a la derecha */
 }
 
 .logo img {
@@ -61,33 +57,37 @@ header {
   height: 100px;
 }
 
-/* Estilos para el menú de navegación */
-header nav {
-  text-align: left;
+/* Estilos para el título (h1) */
+h1 {
+  order: 2; /* Cambia el orden para que esté en el medio */
+  flex: 1; /* Expande para ocupar el espacio disponible en el centro */
+  text-align: center; /* Centra el texto horizontalmente */
+  margin: 0; /* Elimina el margen predeterminado */
 }
 
-header nav ul {
+/* Estilos para el menú de navegación */
+nav ul {
   list-style: none;
   padding: 0;
-  text-align: center;
+  text-align: center; /* Centra los enlaces horizontalmente */
+  order: 1; /* Cambia el orden para que esté a la izquierda */
 }
 
-header nav li {
+nav li {
   display: inline;
   margin: 0 10px;
 }
 
-header nav a {
+nav a {
   text-decoration: none;
   color: #444;
   font-weight: bold;
 }
 
 /* Cambia el color del enlace cuando el mouse está sobre él */
-header nav a:hover {
+nav a:hover {
   color: #ff9900;
 }
-
 
 h1, h2 {
   color: #0066cc;
