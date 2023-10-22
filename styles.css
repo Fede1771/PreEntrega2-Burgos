@@ -309,9 +309,16 @@ label[for="filtrar-por-menor"] {
   margin-bottom: 10px;
 }
 
-.texto-informativo p, .suscripcion p {
+.texto-informativo p, .suscripcion p{
   font-size: 16px;
   color: #444;
+  line-height: 1.6;
+  font-weight: bold;
+}
+
+.nosotros-section p, .equipo-section p, .contacto-section p {
+  font-size: 16px;
+  color: #fffbfb;
   line-height: 1.6;
   font-weight: bold;
 }
